@@ -1,0 +1,3 @@
+<% masks.each_with_index do |mask_path, i| %>
+.container.pattern-<%= i %>   > .bg-mask { -webkit-mask-image: url(<%= mask_path %>); }
+<% end %>
