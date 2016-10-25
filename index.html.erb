@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="patterns.css">
+    <link rel="stylesheet" href="masks.css">
+  </head>
+  <body>
+    <% swatches.each do |swatch| %>
+    <div class="container color-<%= swatch.shade %> pattern-<%= swatch.pattern_id %>" style="background-color: <%= swatch.bgcolor %>;">
+      <div class="bg-mask"></div>
+      <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper malesuada sagittis. Morbi convallis nec risus ultrices scelerisque. Integer fringilla nibh purus, et luctus magna vulputate at. Duis vitae consequat orci, eget pretium leo. Integer vulputate euismod vehicula. Nullam et pharetra purus. Donec iaculis semper nisl, vel finibus ex gravida sit amet. In vehicula, est a suscipit feugiat, mi nisi scelerisque mauris, a pharetra neque lectus at lacus. Cras at velit mauris. Vivamus sollicitudin porttitor purus sed fringilla.</div>
+    </div>
+    <br>
+    <% end %>
+  </body>
+</html>

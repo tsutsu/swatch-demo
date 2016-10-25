@@ -1,0 +1,10 @@
+#!/bin/bash
+
+rm -rf masks/
+mkdir masks/
+cd mask-textures/
+n=0
+for i in *.png; do
+  color2alpha -ca white "$i" "../masks/${n}.png"
+	n=$[ $n + 1 ]
+done

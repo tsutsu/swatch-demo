@@ -1,0 +1,45 @@
+
+body{
+  font-family: Menlo;
+}
+
+.palette-a.color-dark  { background-color: #300; }
+.palette-a.color-mid   { background-color: #966; }
+.palette-a.color-light { background-color: #fee; }
+.palette-b.color-dark  { background-color: #003; }
+.palette-b.color-mid   { background-color: #669; }
+.palette-b.color-light { background-color: #eef; }
+
+.container.color-dark  > .bg-mask { background: rgba(255, 255, 255, 0.5); }
+.container.color-mid   > .bg-mask { background: rgba(255, 255, 255, 0.3); }
+.container.color-light > .bg-mask { background: rgba(255, 255, 255, 1.0); }
+.container.color-dark  > .content { color: white; }
+.container.color-mid   > .content { color: white; }
+
+.container{
+  display: block;
+  width: 30em;
+  position: relative;
+}
+
+.container > .bg-mask{
+  display: block;
+  float: left;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.container > .content{
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  height: 10em;
+  overflow: scroll;
+  width: 100%;
+  z-index: 1;
+  padding: 0.3em;
+}

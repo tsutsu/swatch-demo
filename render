@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'erb'
+require 'ostruct'
+require 'color'
+require 'pathname'
+
+masks_dir = Pathname.new('masks')
+
+template = ERB.new(File.read('index.html.erb'))
+
+unless masks_dir.directory?
+  system 'scripts/build_masks'
+end
+
+masks = Pathname.new('masks').children.find_all{ |f| f.file? and f.basename.to_s =~ /\.png$/ }.sort_by{ |f| f.basename.to_s.split('.').first.to_i }
+
+File.open('masks.css', 'w') do |f|
+  masks.each_with_index do |i, mask_path|
+    f.puts ".container.pattern-#{i}   > .bg-mask { -webkit-mask-image: url(#{mask_path}); }"
+  end
+end
+
+
+swatches = []
+
+100.times do
+  rgb_triple = [rand(256), rand(256), rand(256)]
+  rgb = Color::RGB.from_fraction(*rgb_triple.map{|v| v/255.0})
+  hsl = rgb.to_hsl
+
+  sw = OpenStruct.new
+  sw.bgcolor = "rgb(%d, %d, %d)" % rgb_triple
+
+  sw.shade = case hsl.l
+  when 0.0 ... 0.3
+    :dark
+  when 0.3 ... 0.7
+    :mid
+  when 0.7 .. 1.0
+    :light
+  end
+
+  sw.pattern_id = rand(18)
+
+  swatches.push sw
+end
+
+File.open('index.html', 'w') do |f|
+  f.write(template.result(binding))
+end
